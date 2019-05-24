@@ -11,10 +11,11 @@ class CatImageAdapter @Inject constructor(
     private val catApiService: CatApiService
 ) : AbstractImageAdapter(picasso) {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        catApiService.getRandomCat()
+        catApiService.getRandomCats()
             .enqueue(object : Callback<List<CatMetaData>> {
                 override fun onFailure(call: Call<List<CatMetaData>>, t: Throwable) {
                     holder.bind(R.drawable.ic_times_circle)
+                    logError("Failed loading random cat image metadata.", t)
                 }
 
                 override fun onResponse(call: Call<List<CatMetaData>>, response: Response<List<CatMetaData>>) {

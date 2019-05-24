@@ -2,6 +2,7 @@ package guru.drako.stupics
 
 import retrofit2.Call
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 data class CatMetaData(
     val id: String,
@@ -12,5 +13,5 @@ data class CatMetaData(
 
 interface CatApiService {
     @GET("images/search")
-    fun getRandomCat(): Call<List<CatMetaData>>
+    fun getRandomCats(@Query("limit") limit: Int = 1): Call<List<CatMetaData>>
 }
