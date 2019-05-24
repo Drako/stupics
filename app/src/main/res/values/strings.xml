@@ -2,4 +2,6 @@
     <string name="app_name" translatable="false">Stupics</string>
     <string name="title_cats">Cats</string>
     <string name="title_dogs">Dogs</string>
+    <string name="settings_title">Settings</string>
+    <string name="setting_item_count">Images per page</string>
 </resources>

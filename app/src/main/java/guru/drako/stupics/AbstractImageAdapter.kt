@@ -8,13 +8,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.image_item.*
+import kotlin.properties.Delegates
 
 abstract class AbstractImageAdapter(
     private val picasso: Picasso
 ) : RecyclerView.Adapter<AbstractImageAdapter.ViewHolder>() {
-    companion object {
-        // TODO: make configurable at runtime
-        const val ITEM_COUNT = 10
+    var loadItemCount: Int by Delegates.observable(10) { _, _, _ ->
+        notifyDataSetChanged()
     }
 
     inner class ViewHolder(
@@ -37,6 +37,6 @@ abstract class AbstractImageAdapter(
     }
 
     override fun getItemCount(): Int {
-        return ITEM_COUNT
+        return loadItemCount
     }
 }

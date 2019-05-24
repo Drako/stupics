@@ -1,13 +1,17 @@
 package guru.drako.stupics
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.preference.PreferenceManager
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_main.*
-import java.lang.reflect.Proxy
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
+
     @field:Inject
     lateinit var catImageAdapter: CatImageAdapter
 
@@ -28,6 +32,28 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
+        val prefs = PreferenceManager.getDefaultSharedPreferences(this)
+
+        val itemCount = prefs
+            .getString("preference_item_count", "")?.toInt() ?: 10
+        catImageAdapter.loadItemCount = itemCount
+        dogImageAdapter.loadItemCount = itemCount
+
         image_list.adapter = catImageAdapter
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        super.onCreateOptionsMenu(menu)
+        menuInflater.inflate(R.menu.top_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.menu_settings -> startActivity(
+                Intent(this, SettingsActivity::class.java)
+            )
+        }
+        return true
     }
 }
