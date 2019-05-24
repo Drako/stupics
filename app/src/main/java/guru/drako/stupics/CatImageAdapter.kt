@@ -19,7 +19,9 @@ class CatImageAdapter @Inject constructor(
                 }
 
                 override fun onResponse(call: Call<List<CatMetaData>>, response: Response<List<CatMetaData>>) {
-                    holder.bind(response.body()!![0].url)
+                    val url = response.body()!![0].url
+                    logInfo("Loading image \"$url\".")
+                    holder.bind(url)
                 }
             })
     }

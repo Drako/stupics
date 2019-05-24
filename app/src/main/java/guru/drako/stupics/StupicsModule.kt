@@ -19,12 +19,14 @@ abstract class StupicsModule {
         @JvmStatic
         @Provides
         @Singleton
-        fun providePicasso() = Picasso.get()
+        fun providePicasso(): Picasso = Picasso.get().apply {
+            isLoggingEnabled = true
+        }
 
         @JvmStatic
         @Provides
         @Singleton
-        fun provideCatApiService() = Retrofit.Builder()
+        fun provideCatApiService(): CatApiService = Retrofit.Builder()
             .baseUrl("https://api.thecatapi.com/v1/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()

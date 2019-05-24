@@ -11,3 +11,11 @@ inline fun <reified TagType> TagType.logError(message: String, exception: Throwa
         Log.e(simpleName<TagType>(), message)
     }
 }
+
+inline fun <reified TagType> TagType.logInfo(message: String, exception: Throwable? = null) {
+    if (exception != null) {
+        Log.i(simpleName<TagType>(), message, exception)
+    } else {
+        Log.i(simpleName<TagType>(), message)
+    }
+}
