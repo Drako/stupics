@@ -10,7 +10,9 @@ class CatImageAdapter @Inject constructor(
     picasso: Picasso,
     private val catApiService: CatApiService
 ) : AbstractImageAdapter(picasso) {
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+
         catApiService.getRandomCats()
             .enqueue(object : Callback<List<CatMetaData>> {
                 override fun onFailure(call: Call<List<CatMetaData>>, t: Throwable) {
@@ -20,9 +22,10 @@ class CatImageAdapter @Inject constructor(
 
                 override fun onResponse(call: Call<List<CatMetaData>>, response: Response<List<CatMetaData>>) {
                     val url = response.body()!![0].url
-                    logInfo("Loading image \"$url\".")
+                    logInfo("Loading cat image \"$url\".")
                     holder.bind(url)
                 }
             })
     }
+
 }

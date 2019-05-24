@@ -30,6 +30,15 @@ abstract class StupicsModule {
             .baseUrl("https://api.thecatapi.com/v1/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-            .create<CatApiService>()
+            .create()
+
+        @JvmStatic
+        @Provides
+        @Singleton
+        fun provideDogApiService(): DogApiService = Retrofit.Builder()
+            .baseUrl("https://dog.ceo/api/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create()
     }
 }

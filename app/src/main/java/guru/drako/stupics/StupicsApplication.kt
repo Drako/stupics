@@ -7,6 +7,7 @@ import dagger.android.AndroidInjector
 import dagger.android.ContributesAndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasActivityInjector
+import java.io.PrintStream
 import javax.inject.Inject
 
 class StupicsApplication : Application(), HasActivityInjector {
